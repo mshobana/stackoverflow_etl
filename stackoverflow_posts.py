@@ -92,5 +92,4 @@ with DAG('stackoverflow',
               write_disposition='WRITE_TRUNCATE',
               bigquery_conn_id=gcp_connection_id)
 
-    extract_posts_data >> move_users_data_to_staging
-    extract_users_data >> move_users_data_to_staging
+    extract_posts_data >> extract_users_data >> move_users_data_to_staging >> move_posts_data_to_staging >> transform_and_load
